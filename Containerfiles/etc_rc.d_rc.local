@@ -1,0 +1,10 @@
+#!/bin/bash
+
+nsupdate << EOF
+server 10.88.0.1
+update delete `hostname`.docker A
+update add `hostname`.docker 86400 A `ip -4 ad | grep "^[0-9][0-9]*" | grep -v "^[0-9][0-9]*:[ ]*lo:"  | head -n 1 | cut -d ':' -f2 | cut -d '@' -f1 | xargs ip -4 ad sh | grep -w inet | { read a b c ; printf "$b" | cut -d '/' -f1 ; } `
+send
+EOF
+
+{ which nsupdate ; echo "`date` : S-a rulat asta ???" ; } >> /tmp/s-a_rulat_asta 2>>&1 

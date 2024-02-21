@@ -1,0 +1,5 @@
+from docker.io/library/almalinux:9
+#run yum search named
+#run yum search bind
+run yum install bind -y 
+entrypoint [ "/usr/sbin/named" , "-u" , "named" , "-c" , "/etc/named.conf" , "-f" , "-g" ]

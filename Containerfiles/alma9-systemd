@@ -1,0 +1,4 @@
+from docker.io/almalinux/9-base:latest
+run yum install -y openssh-server procps systemd iproute iputils bind-utils telnet nmap-ncat ncurses
+
+entrypoint [ "/sbin/init" ]

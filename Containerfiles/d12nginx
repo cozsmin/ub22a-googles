@@ -1,0 +1,8 @@
+from debian:12
+run apt update
+run apt -y install nginx 
+copy index.html /var/www/html
+
+expose 80 443
+
+entrypoint [ "/usr/sbin/nginx" , "-g" , "daemon off; master_process on;" ]

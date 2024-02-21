@@ -1,0 +1,3 @@
+from docker.io/library/ubuntu:22.04
+run apt update && apt install bind9 -y
+entrypoint [ "/usr/sbin/named" , "-u" , "bind" , "-f" , "-g" ]

@@ -1,0 +1,4 @@
+from docker.io/library/ubuntu:22.04
+run apt update && apt install -y nginx
+#cmd [ "/bin/bash" , "-c" , "while true ; do sleep 100 ; done " ]
+entrypoint [ "/usr/sbin/nginx" , "-g" ,  "daemon off; master_process on;" ]
