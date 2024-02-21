@@ -1,0 +1,10 @@
+from docker.io/library/ubuntu:22.04
+run apt update && apt install -y systemd-sysv systemd iproute2 iputils-ping telnet
+
+run apt install -y curl
+run echo $PATH
+run apt install -y hostname bind9-dnsutils
+
+run apt clean
+
+entrypoint [ "/sbin/init" ]
