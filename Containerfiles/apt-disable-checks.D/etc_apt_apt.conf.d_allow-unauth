@@ -1,0 +1,4 @@
+APT::Get::AllowUnauthenticated "true";
+
+Acquire::Check-Valid-Until false;
+

@@ -1,0 +1,1 @@
+deb [trusted=yes] file:/opt/puppetlabs/server/data/packages/public/2023.6.0/puppet_enterprise ./
