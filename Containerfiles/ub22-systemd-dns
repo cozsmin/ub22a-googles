@@ -1,0 +1,15 @@
+from docker.io/library/ubuntu:22.04
+run apt update && apt install -y systemd-sysv systemd iproute2 iputils-ping telnet
+
+run apt install -y curl
+run apt install -y hostname bind9-dnsutils
+
+run rm -fr /etc/rc.local /etc/rc.d/rc.local ; mkdir -p /etc/rc.d/
+copy etc_rc.d_rc.local /etc/rc.d/rc.local
+run ln -fs /etc/rc.d/rc.local /etc/ ; chmod +x /etc/rc.d/rc.local
+
+
+run apt clean
+
+
+entrypoint [ "/sbin/init" ]
