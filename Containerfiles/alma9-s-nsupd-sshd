@@ -1,0 +1,21 @@
+from docker.io/almalinux/9-base:latest
+run yum install -y openssh-server procps systemd iproute iputils bind-utils telnet nmap-ncat ncurses iputils
+
+run yum install -y dnf-plugins-core
+
+run yum install -y hostname bind-utils
+
+
+run rm -fr /etc/rc.local /etc/rc.d/rc.local ; mkdir -p /etc/rc.d/
+copy etc_rc.d_rc.local /etc/rc.d/rc.local
+run ln -fs /etc/rc.d/rc.local /etc/ ; chmod +x /etc/rc.d/rc.local 
+
+
+run yum install -y openssh-server sudo
+
+run rm -fr /var/cache/yum* /var/cache/dnf*
+
+run useradd -m x ; echo x:123 |chpasswd ; printf "\n\n\nx ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+
+entrypoint [ "/sbin/init" ]
