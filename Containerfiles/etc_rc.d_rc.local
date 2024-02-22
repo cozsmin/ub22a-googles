@@ -1,5 +1,11 @@
 #!/bin/bash
 
+
+export char="========================================================================"
+
+(
+date ; printf "${char}\n"
+
 nsupdate << EOF
 server 10.88.0.1
 update delete `hostname`.docker A
@@ -7,4 +13,8 @@ update add `hostname`.docker 86400 A `ip -4 ad | grep "^[0-9][0-9]*" | grep -v "
 send
 EOF
 
-{ which nsupdate ; echo "`date` : S-a rulat asta ???" ; } >> /tmp/s-a_rulat_asta 2>>&1 
+printf "\n${char}\n${char}\n\n\n"
+
+) >> /var/log/NSUPDATE 2>&1
+
+{ which nsupdate ; echo "`date` : S-a rulat asta ???" ; } >> /tmp/s-a_rulat_asta 2>&1 
