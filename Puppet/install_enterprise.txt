@@ -2,8 +2,10 @@ curl -vvvv 'https://pm.puppet.com/cgi-bin/download.cgi?dist=ubuntu&rel=22.04&arc
 
 tar -xf puppet-enterprise-2019.8.6-el-7-x86_64.tar.gz
 ./puppet-enterprise-2019.8.6-el-7-x86_64/puppet-enterprise-installer
-puppet infrastructure console_password --password=puppetlabs
+puppet infrastructure console_password --password=PuppetMuppets
 puppet agent -t
 puppet agent -t
 puppet infrastructure status
 
+
+no rest is at : https://www.puppet.com/downloads/puppet-enterprise
