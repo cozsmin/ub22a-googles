@@ -1,0 +1,9 @@
+
+
+iptables -I FORWARD -j ACCEPT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+grep [0-9] puppet_ports | while read port ; do
+	iptables -i bond0 -o virbr0-I FORWARD -j ACCEPT -m tcp -p tcp --dport $port
+	iptables -t nat -i bond0 -I PREROUTING -j DNAT -m tcp -p tcp --dport $port --to 192.168.122.100:${port}
+done
+
+

@@ -1,0 +1,24 @@
+from ub22-gcloud:latest
+run apt update && apt install -y systemd-sysv systemd iproute2 iputils-ping telnet
+
+run apt install -y curl
+run apt install -y hostname bind9-dnsutils
+
+## run rm -fr /etc/rc.local /etc/rc.d/rc.local ; mkdir -p /etc/rc.d/
+## copy nsupd.D/etc_rc.d_rc.local /etc/rc.d/rc.local
+## run ln -fs /etc/rc.d/rc.local /etc/ ; chmod +x /etc/rc.d/rc.local
+
+
+run mkdir -p /root/scripts/
+copy nsupd.D/etc_rc.d_rc.local /root/scripts/nsupd.exe
+copy nsupd.D/nsupd.service /lib/systemd/system/nsupd.service
+run chmod +x /root/scripts/nsupd.exe ; systemctl enable nsupd.service
+
+## run apt install -y openssh-server sudo
+## run apt install -y openssh-client # desi asta parea acolo , doar alma il vrea ...
+
+run apt clean
+
+run useradd -m x ; echo x:123 | chpasswd ; printf "\n\n\nx ALL=(ALL) NOPASSWD:ALL\n" >> /etc/sudoers
+
+entrypoint [ "/sbin/init" ]
