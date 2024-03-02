@@ -1,0 +1,25 @@
+S-a intamplat dupa ce am executat install_with_custom_requests , dupa ce am vazut filmuletul cu "gagica" .......
+
+!!! Is prost , am adaugat eu ca prostu "pe_repo::platform::ubuntu_2004_amd64" la agents inloc de "master" ....
+
+
+[root@alma9c ~]# puppet agent -t 
+Info: Refreshing CA certificate
+Info: CA certificate is unmodified, using existing CA certificate
+Info: Refreshing CRL
+Info: CRL is unmodified, using existing CRL
+Info: csr_attributes file loading from /etc/puppetlabs/puppet/csr_attributes.yaml
+Info: Creating a new SSL certificate request for alma9c.virsh
+Info: Certificate Request fingerprint (SHA256): 3C:48:76:CE:0A:63:A8:E5:7C:0F:98:0B:0E:3E:53:03:35:62:B7:BD:EF:7A:A0:AA:36:46:70:84:7C:62:21:6E
+Info: Downloaded certificate for alma9c.virsh from https://puppet-server.virsh:8140/puppet-ca/v1
+Info: Using environment 'production'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Info: Loading facts
+Warning: The current total number of facts: 3394 exceeds the number of facts limit: 2048
+Notice: Requesting catalog from puppet-server.virsh:8140 (192.168.122.100)
+Notice: Catalog compiled by puppet-server.virsh
+Error: Could not retrieve catalog from remote server: Error 500 on SERVER: Server Error: Could not find resource 'Package[pe-java17]' in parameter 'require' (file: /opt/puppetlabs/puppet/modules/pe_repo/manifests/bulk_pluginsync.pp, line: 49) on node alma9c.virsh
+Warning: Not using cache on failed catalog
+Error: Could not retrieve catalog; skipping run
+

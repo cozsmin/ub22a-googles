@@ -1,0 +1,10 @@
+From the console sidebar, navigate to the Node groups page. Expand PE Infrastructure (click +) and then click PE Master.
+
+Add the repository class for the agent node OS that you want to support.
+
+On the Classes tab, in the Add new class field, enter pe_repo.
+From the list of classes, select the pe_repo::platform::ubuntu_2004_amd64 repo class.
+Click Add class.
+
+puppet agent -t ## on the master node ...
+

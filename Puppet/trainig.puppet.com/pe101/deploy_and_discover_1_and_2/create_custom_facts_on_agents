@@ -1,0 +1,38 @@
+On Agent :
+
+facter timezone
+
+mkdir -p /etc/puppetlabs/facter/facts.d
+
+cat > /etc/puppetlabs/facter/facts.d/datacenter.sh << EOF
+#!/usr/bin/env bash
+echo "datacenter=dupa_blocurile_griiiyyyyyyyyyy"
+EOF
+
+chmod o+x /etc/puppetlabs/facter/facts.d/datacenter.sh
+
+facter datacenter
+
+puppet agent -t 
+
+
+On the Server Web page check that the node has the "datacenter" fact set .....
+
+
+
+On Windows Agent :
+
+facter datacenter
+
+facter timezone 
+
+echo write-host "datacenter=alte_blocuri_si_mai_gri" > C:\ProgramData\PuppetLabs\facter\facts.d\datacenter.ps1
+
+facter datacenter 
+
+puppet agent -t 
+
+
+
+On the Server Web page check that the node has the "datacenter" fact set for he Windows one ........
+

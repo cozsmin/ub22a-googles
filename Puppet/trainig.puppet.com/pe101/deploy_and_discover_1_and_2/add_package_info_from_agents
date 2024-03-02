@@ -1,0 +1,14 @@
+( Asta e ala dupa care ma doare capu' )
+
+Got oto Node groups page, expand (click +) PE Infrastructure, and click the PE Agent 
+On the Classes tab make sure you have class  puppet_enterprise::profile::agent with the following :
+	package_inventory_enabled 	true
+	pcp_broker_host			"puppet
+	primary_uris			["puppet"]
+
+Click run -> puppet , select the hosts, or leave it like that, click "run job" , the press "run again" -> "al nodees" 
+
+Go to packages , and filter by package name , pres a package, and see which hosts have it ...
+
+ 
+

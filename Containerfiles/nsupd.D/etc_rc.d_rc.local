@@ -1,11 +1,34 @@
 #!/bin/bash
 
+#ZONE_TYPE="docker"
+ZONE_TYPE="virsh"
+
+
+
 ADD=""
 if [ "$1" == "" ] || [ "$1" == "start" ] ; then
-	ADD="update add `hostname`.docker 86400 A `ip -4 ad | grep \"^[0-9][0-9]*\" | grep -v \"^[0-9][0-9]*:[ ]*lo:\"  | head -n 1 | cut -d ':' -f2 | cut -d '@' -f1 | xargs ip -4 ad sh | grep -w inet | { read a b c ; printf \"$b\" | cut -d '/' -f1 ; } `"
+	__IP="`ip -4 ad | grep \"^[0-9][0-9]*\" | grep -v \"^[0-9][0-9]*:[ ]*lo:\"  | head -n 1 | cut -d ':' -f2 | cut -d '@' -f1 | xargs ip -4 ad sh | grep -w inet | { read a b c ; printf \"$b\" | cut -d '/' -f1 ; } `"
+	ADD="update add `hostname`.${ZONE_TYPE} 86400 A ${__IP}"
+	__IP_VIRSH=`echo "${__IP}" | cut -d '.'  -f4`
+	__IP_1=`echo "${__IP}" | cut -d '.'  -f1`
+	__IP_2=`echo "${__IP}" | cut -d '.'  -f2`
+	__IP_3=`echo "${__IP}" | cut -d '.'  -f3`
+	__IP_4=`echo "${__IP}" | cut -d '.'  -f4`
+	__IP_PODMAN="${__IP_4}.${__IP_3}"
+	__IP_DOCKER=${__IP_PODMAN}
+	ADD_REVERSE="update add ${__IP_4}.${__IP_3}.${__IP_2}.${__IP_1}.in-addr.arpa 86400 PTR"
+	ADD_PODMAN="${ADD_REVERSE} `hostname`.podman."
+	ADD_DOCKER="${ADD_REVERSE} `hostname`.docker."
+	ADD_VIRSH="${ADD_REVERSE} `hostname`.virsh."
 fi
 
+#122.168.192.in-addr.arpa
+test "$ZONE_TYPE" == "docker" && { PTR_ADD="${ADD_DOCKER}" ; _IP_DELETE=${__IP_DOCKER} ; _IP_DELETE_ZONE="${__IP_2}.${__IP_1}.in-addr.arpa" ; }
+test "$ZONE_TYPE" == "podman" && { PTR_ADD="${ADD_PODMAN}" ; _IP_DELETE=${__IP_PODMAN} ; _IP_DELETE_ZONE="${__IP_2}.${__IP_1}.in-addr.arpa" ; }
+test "$ZONE_TYPE" == "virsh"  && { PTR_ADD="${ADD_VIRSH}"  ; _IP_DELETE=${__IP_VIRSH}  ; _IP_DELETE_ZONE="${__IP_3}.${__IP_2}.${__IP_1}.in-addr.arpa" ; }
+
 echo $ADD
+echo $PTR_ADD
 
 ##exit
 
@@ -18,7 +41,7 @@ date ; printf "${char}\n"
 
 nsupdate << EOF
 server 10.88.0.1
-update delete `hostname`.docker A
+update delete `hostname`.${ZONE_TYPE} A
 $ADD
 send
 EOF
@@ -26,6 +49,21 @@ EOF
 printf "\n${char}\n${char}\n\n\n"
 
 ) >> /var/log/NSUPDATE 2>&1
+
+(
+date ; printf "${char}\n"
+
+nsupdate << EOF
+server 10.88.0.1
+update delete ${_IP_DELETE}.${_IP_DELETE_ZONE} PTR
+$PTR_ADD
+send
+EOF
+
+printf "\n${char}\n${char}\n\n\n"
+
+) >> /var/log/NSUPDATE 2>&1
+
 
 
 

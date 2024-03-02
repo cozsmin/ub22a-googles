@@ -1,0 +1,12 @@
+  Activity Service: Running, checked via https://puppet-server.virsh:4433/status/v1/services
+  Agentless Catalog Executor Service: Running, checked via https://puppet-server.virsh:44633/admin/status
+  Bolt Service: Running, checked via https://puppet-server.virsh:62658/admin/status
+  Classifier: Running, checked via https://puppet-server.virsh:4433/status/v1/services
+  Orchestrator: Running, checked via https://puppet-server.virsh:8143/status/v1/services
+  PCP Broker: Running, checked via https://puppet-server.virsh:8143/status/v1/services
+  PCP Broker v2: Running, checked via https://puppet-server.virsh:8143/status/v1/services
+  PostgreSQL: Running, checked via postgresql://puppet-server.virsh:5432/
+  Puppet Server: Running, checked via https://puppet-server.virsh:8140/status/v1/services
+  PuppetDB: Running, checked via https://puppet-server.virsh:8081/status/v1/services
+  RBAC: Running, checked via https://puppet-server.virsh:4433/status/v1/services
+

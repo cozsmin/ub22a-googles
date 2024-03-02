@@ -1,0 +1,19 @@
+On Agent:
+
+puppet config print certname
+
+/opt/puppetlabs/bin/puppet-enterprise-uninstaller -y -pd
+
+
+
+On Server:
+
+puppet node purge <CERTNAME>
+
+
+On Agent :
+
+wget https://puppet:8140/packages/current/install.bash
+bash install.bash custom_attributes:challengePassword=PASSWORD_FOR_AUTOSIGNER_SCRIPT extension_requests:pp_role=<ROLE> extension_requests:pp_datacenter=<DATACENTER>
+
+# uneori mai trebuie vreo 2-3 "puppet agent -t" pe Agenti ca sa ii vada corect ...
