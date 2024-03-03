@@ -7,7 +7,14 @@ run yum install -y hostname bind-utils
 
 
 run rm -fr /etc/rc.local /etc/rc.d/rc.local ; mkdir -p /etc/rc.d/
-copy nsupd.D/etc_rc.d_rc.local /etc/rc.d/rc.local
+run mkdir -p /root/scripts/
+
+copy nsupd.D/nsupdate.exe /root/scripts/nsupdate.exe
+
+run mkdir -p /etc/rc.d/
+run chmod +x /root/scripts/nsupdate.exe 
+run printf "/root/scripts/nsupdate.exe --zone docker" > /etc/rc.d/rc.local
+
 run ln -fs /etc/rc.d/rc.local /etc/ ; chmod +x /etc/rc.d/rc.local 
 
 run rm -fr /var/cache/yum* /var/cache/dnf*
