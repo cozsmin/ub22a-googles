@@ -1,8 +1,32 @@
 #!/bin/bash
 
-#ZONE_TYPE="docker"
-ZONE_TYPE="virsh"
+DEFAULT_ZONE_TYPE="docker"
+DEFAULT_ZONE_TYPE="virsh"
 
+
+declare -a arr
+at=0
+arr_size=0
+temp_value=""
+
+
+for arg in "$@" ; do
+	arr[$at]="$arg"
+	let at++
+done
+
+arr_size="$at"
+at=0
+
+while [ $at -le $arr_size ] ; do
+	let temp_value="${at}+1"
+	to_low=`echo "${arr[$at]}" | tr '[A-Z]' '[a-z]' `
+	{ test  "$to_low" == "--zone" || test  "$to_low" == "--zonetype" || test  "$to_low" == "--zone-type || test  "$to_low" == "--zone_type" ; } && ZONE_TYPE="${arr[$temp_value]}"
+	let at++
+done
+
+
+test "$ZONE_TYPE" == "" && ZONE_TYPE="$DEFAULT_ZONE_TYPE"
 
 
 ADD=""
