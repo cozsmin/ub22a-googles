@@ -13,7 +13,7 @@ copy nsupd.D/nsupdate.exe /root/scripts/nsupdate.exe
 
 run mkdir -p /etc/rc.d/
 run chmod +x /root/scripts/nsupdate.exe 
-run printf "/root/scripts/nsupdate.exe --zone docker" > /etc/rc.d/rc.local
+run printf "/root/scripts/nsupdate.exe --zone docker > /var/log/NSUPDATE 2>&1" > /etc/rc.d/rc.local
 
 run ln -fs /etc/rc.d/rc.local /etc/ ; chmod +x /etc/rc.d/rc.local 
 
