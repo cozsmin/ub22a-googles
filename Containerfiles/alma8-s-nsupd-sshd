@@ -1,4 +1,6 @@
-## from docker.io/almalinux/8-base:latest
+## VERSION 0.0.3
+
+## from docker.io/almalinux/9-base:latest
 
 
 
@@ -24,6 +26,7 @@ run yum install -y openssh-clients
 run rm -fr /var/cache/yum* /var/cache/dnf*
 
 run useradd -m x ; echo x:123 |chpasswd ; printf "\n\n\nx ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 
 run printf "\n\nMatch user x\n\tPasswordAuthentication yes\n\n" >> /etc/ssh/sshd_config
 
