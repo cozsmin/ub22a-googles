@@ -1,9 +1,9 @@
-## from docker.io/almalinux/9-base:latest
+## from docker.io/almalinux/8-base:latest
 
 
 
 
-FROM alma9-systemd-nsupdate:latest
+FROM alma8-systemd-nsupdate:latest
 
 
 run yum install -y openssh-server procps systemd iproute iputils bind-utils telnet nmap-ncat ncurses iputils
@@ -24,7 +24,6 @@ run yum install -y openssh-clients
 run rm -fr /var/cache/yum* /var/cache/dnf*
 
 run useradd -m x ; echo x:123 |chpasswd ; printf "\n\n\nx ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
 
 run printf "\n\nMatch user x\n\tPasswordAuthentication yes\n\n" >> /etc/ssh/sshd_config
 
