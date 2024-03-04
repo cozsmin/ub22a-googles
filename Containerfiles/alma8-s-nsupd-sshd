@@ -5,7 +5,7 @@
 
 
 
-FROM alma8-systemd-nsupdate:latest
+FROM alma8-systemd-nsupdate:0.0.3
 
 
 run yum install -y openssh-server procps systemd iproute iputils bind-utils telnet nmap-ncat ncurses iputils
