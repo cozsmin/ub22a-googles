@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for env_file in nsupdate_env nsupdate.env ; do
+	test -x "/root/scripts/${env_file}" && . "/root/scripts/${env_file}"
+done
+
+/root/scripts/nsupdate.exe >> /var/log/NSUPDATE 2>&1
