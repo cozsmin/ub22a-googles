@@ -1,3 +1,6 @@
+## VERSION 0.0.3
+
+
 from docker.io/almalinux/8-base:latest
 run yum install -y openssh-server procps systemd iproute iputils bind-utils telnet nmap-ncat ncurses iputils
 
@@ -13,7 +16,9 @@ copy nsupd.D/nsupdate.exe /root/scripts/nsupdate.exe
 
 run mkdir -p /etc/rc.d/
 run chmod +x /root/scripts/nsupdate.exe 
-run printf "#!/bin/bash\n\n/root/scripts/nsupdate.exe --zone docker > /var/log/NSUPDATE 2>&1" > /etc/rc.d/rc.local
+## run printf "#!/bin/bash\n\n/root/scripts/nsupdate.exe --zone docker > /var/log/NSUPDATE 2>&1" > /etc/rc.d/rc.local
+## ZONE will be specified at create-time ...
+run printf "#!/bin/bash\n\n/root/scripts/nsupdate.exe > /var/log/NSUPDATE 2>&1" > /etc/rc.d/rc.local
 
 run ln -fs /etc/rc.d/rc.local /etc/ ; chmod +x /etc/rc.d/rc.local 
 
